@@ -63,6 +63,8 @@ const cloth = new WHS.Tube({ // Softbody (blue).
   }
 });
 
+mouse.track(cloth);
+
 cloth.addTo(world);
 
 cloth.appendAnchor(world, arm, 0, 1, false);

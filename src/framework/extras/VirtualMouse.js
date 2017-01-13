@@ -42,8 +42,12 @@ export class VirtualMouse extends Events {
 
   track(component) {
     let isHovered = false;
+    let mousedown = false;
+    let mouseup = true;
+    let dragging = false;
 
     this.on('move', () => {
+      if (mousedown) dragging = true;
       if (this.hovers(component)) {
         if (isHovered) component.emit('mousemove');
         else {
@@ -57,16 +61,30 @@ export class VirtualMouse extends Events {
     });
 
     this.on('click', () => {
-      if (isHovered) component.emit('click');
+      if (dragging) {
+          component.emit('dragged');
+          if(isHovered){
+              component.emit('dragIn');
+          }
+          else {
+              component.emit('dragOut');
+          }
+          dragging = false;
+      }
+      else if (isHovered) component.emit('click');
       else component.emit('offClick');
     });
 
     this.on('mousedown', () => {
       if (isHovered) component.emit('mousedown');
+      mousedown = true;
+      mouseup = false;
     });
 
     this.on('mouseup', () => {
       if (isHovered) component.emit('mouseup');
+      mouseup = true;
+      mousedown = false;
     });
   }
 
