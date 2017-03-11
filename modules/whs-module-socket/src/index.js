@@ -10,21 +10,16 @@ export default class SocketModule {
 
     this.meshes = new Map();
     this.socketServer = this.params.scheme + '//' + this.params.hostname + ':' + this.params.port;
-    this.init();
-  }
-
-  init() {
-    const socketServer = this.socketServer;
-    this.socket = io.connect(socketServer);
+    this.socket = io.connect(this.socketServer);
 
     this.socket.on('connect', () => {
-      console.info('Socket connected to ' + socketServer);
+      console.info('Socket connected to ' + this.socketServer);
     });
 
     this.socket.on('event', () => {}); // this takes data
 
     this.socket.on('disconnect', () => {
-      console.info('Socket disconnected from ' + socketServer);
+      console.info('Socket disconnected from ' + this.socketServer);
     });
   }
 
