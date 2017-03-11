@@ -1,0 +1,74 @@
+{
+  "name": "whs-module-socket",
+  "version": "0.0.1",
+  "description": "Socket module for whs",
+  "main": "build/SocketPlugin.js",
+  "scripts": {
+    "start": "webpack --watch",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "whs-module",
+    "socket",
+    "socket-io"
+  ],
+  "author": "hirako2000",
+  "license": "MIT",
+  "dependencies": {
+    "socket.io": "^1.7.3",
+    "socket.io-client": "^1.7.3"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2017,
+      "sourceType": "module"
+    }
+  },
+  "xo": {
+    "space": 2,
+    "esnext": true,
+    "parser": "babel-eslint",
+    "envs": [
+      "node",
+      "browser",
+      "es6"
+    ],
+    "syntax_map": {
+      "JavaScript (Babel)": "javascript"
+    },
+    "rules": {
+      "operator-linebreak": [
+        2,
+        "before"
+      ],
+      "curly": [
+        2,
+        "multi-or-nest"
+      ],
+      "one-var": 0,
+      "no-else-return": 1,
+      "no-undef": 0,
+      "no-new": 0,
+      "camelcase": 0,
+      "linebreak-style": 0,
+      "new-cap": [
+        1,
+        {
+          "newIsCap": true,
+          "capIsNew": true,
+          "properties": false
+        }
+      ],
+      "babel/arrow-parens": 0,
+      "xo/filename-case": 0,
+      "no-warning-comments": 0,
+      "unicorn/filename-case": 0,
+      "import/no-unassigned-import": 0,
+      "import/prefer-default-export": 0
+    }
+  },
+  "devDependencies": {
+    "xo": "^0.17.1"
+  }
+}
