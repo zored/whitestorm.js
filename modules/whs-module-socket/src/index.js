@@ -16,11 +16,13 @@ export default class SocketModule {
   init() {
     const socketServer = this.socketServer;
     this.socket = io.connect(socketServer);
+
     this.socket.on('connect', () => {
       console.info('Socket connected to ' + socketServer);
     });
 
     this.socket.on('event', () => {}); // this takes data
+
     this.socket.on('disconnect', () => {
       console.info('Socket disconnected from ' + socketServer);
     });
@@ -32,6 +34,7 @@ export default class SocketModule {
 
   onNewMesh(cb) {
     const meshes = this.meshes;
+
     this.socket.on('new-mesh', msg => {
       const boxx = new WHS.Box({
         geometry: {
@@ -90,6 +93,7 @@ export default class SocketModule {
       const mesh = self.meshes.get(this.uuid);
       mesh.position = params;
       const uuid = this.uuid;
+
       self.socket.emit('position-change', {
         uuid,
         mesh: mesh.geometry, // we pass the mesh geometry as well, not using it yet
