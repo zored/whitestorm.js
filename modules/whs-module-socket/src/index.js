@@ -33,18 +33,17 @@ export default class SocketModule {
     this.socket.on('new-mesh', msg => {
       const boxx = new WHS.Box({
         geometry: {
-          height: 100,
-          width: 100,
-          depth: 100
+          height: msg.mesh.geometry.height,
+          width: msg.mesh.geometry.width,
+          depth: msg.mesh.geometry.depth
         },
 
-        position: msg.position,
+        position: msg.mesh.position,
         material: new THREE.MeshBasicMaterial()
       });
 
       boxx.uuid = msg.uuid;
       meshes.set(msg.uuid, boxx);
-
       cb(boxx);
     });
   }
@@ -73,7 +72,6 @@ export default class SocketModule {
         material: this.material
       };
 
-      this.position = mesh.position;
       self.meshes.set(this.uuid, this);
 
       self.socket.emit('create-mesh', {
@@ -91,7 +89,7 @@ export default class SocketModule {
 
       self.socket.emit('position-change', {
         uuid,
-        mesh: mesh.geometry, // we pass the mesh geometry as well, not using it yet
+        geometry: mesh.geometry,
         position: mesh.position
       });
     };

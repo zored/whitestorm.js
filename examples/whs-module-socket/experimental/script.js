@@ -37,9 +37,9 @@ controlsModule.controls.autoRotate = true;
 
 const box = new WHS.Box({
   geometry: {
-    height: 100,
-    width: 100,
-    depth: 100
+    height: Math.random() * 200,
+    width: Math.random() * 200,
+    depth: Math.random() * 200
   },
 
   position: [Math.random() * 200, Math.random() * 250, Math.random() * 250],
