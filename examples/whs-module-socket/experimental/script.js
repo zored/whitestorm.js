@@ -1,5 +1,4 @@
 import * as UTILS from '../../globals';
-import SocketModule from '../../../modules/whs-module-socket/src';
 
 const controlsModule = new WHS.controls.OrbitModule();
 const cameraModule = new WHS.app.CameraModule({
