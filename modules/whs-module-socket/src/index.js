@@ -31,6 +31,22 @@ export default class SocketModule {
     const meshes = this.meshes;
 
     this.socket.on('new-mesh', msg => {
+      let material = null;
+      switch (msg.mesh.material.type) {
+        case 'MeshBasicMaterial':
+          material = new THREE.MeshBasicMaterial();
+          break;
+        case 'MeshPhongMaterial':
+          material = new THREE.MeshPhongMaterial();
+          break;
+        case 'MeshLambertMaterial':
+          material = new THREE.MeshLambertMaterial();
+          break;
+        default:
+          material = null;
+          break;
+      }
+
       const boxx = new WHS.Box({
         geometry: {
           height: msg.mesh.geometry.height,
@@ -38,8 +54,9 @@ export default class SocketModule {
           depth: msg.mesh.geometry.depth
         },
 
+        shadow: msg.mesh.shadow,
         position: msg.mesh.position,
-        material: new THREE.MeshBasicMaterial()
+        material
       });
 
       boxx.uuid = msg.uuid;
@@ -69,7 +86,8 @@ export default class SocketModule {
       const mesh = {
         geometry: this.geometry,
         position: this.position,
-        material: this.material
+        material: this.material,
+        shadow: this.shadow
       };
 
       self.meshes.set(this.uuid, this);

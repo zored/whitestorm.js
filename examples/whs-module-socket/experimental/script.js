@@ -48,7 +48,7 @@ const box = new WHS.Box({
     cast: false
   },
 
-  material: new THREE.MeshBasicMaterial({
+  material: new THREE.MeshPhongMaterial({
     color: 0xffffff
   }),
 
